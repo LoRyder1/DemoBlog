@@ -1,16 +1,20 @@
 class ArticlesController < ApplicationController
 
-def new
+  def new
   
-end
+  end
 
-def create
-  x = params[:article]
-  title = x[:title]
-  raise title
-  # puts "title should be =========================="
-  # puts title
+  def create
+    @article = Article.new(article_params)
+  
+    @article.save
+    redirect_to @article
 
-end
+  end
+  
+  private
+  def article_params
+    params.require(:article).permit(:title, :text)
+  end
 
 end
